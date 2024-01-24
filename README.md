@@ -8,4 +8,4 @@ A simple web test using mocha,allure and selenium web driver
 2. Clone this repository `git clone git@github.com:blackforest-t/allure-mocha-seleniumWD-example.git && cd allure-mocha-seleniumWD-example`
 3. Install project dependencies `npm install`
 4. Run tests via `npm test`.
-5. Run `npm run report:lin` to build `html` report on linux.
+5. Run `npm run test:report:win/lin` to run tests and to build `html` report.
