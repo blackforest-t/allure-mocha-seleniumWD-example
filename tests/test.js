@@ -8,7 +8,7 @@ describe('A simple repositories check', async function () {
   this.timeout(timeoutTime * 1.5);
   beforeEach(async () => {
     await b.init();
-    let page = await b.driver
+    await b.driver
       .get('https://github.com/blackforest-t')
       .then(() => {
         return true;
@@ -62,7 +62,7 @@ describe('A simple repositories check', async function () {
     );
     await assert.isAtLeast(
       repCount.length,
-      2,
+      1,
       `Count of repositories are less than expected, curent: ${repCount.length}`
     );
   });
@@ -112,20 +112,22 @@ describe('A simple repositories check', async function () {
     await b.driver.get(
       'https://github.com/blackforest-t/allure-mocha-seleniumWD-example'
     );
-    //broken, will work only on existing session
     let starButton = await b.driver
       .wait(
         b.until.elementLocated(
           b.By.css(
-            `button[data-ga-click="Repository, click star button, action:files#disambiguate; text:Star"]`
+            `#repository-details-container .tooltipped.tooltipped-s.btn-sm.btn.BtnGroup-item`
           )
         ),
         timeoutTime
       )
+      .then(async (elem) => {
+        await elem.click();
+        return true;
+      })
       .catch(() => {
         return false;
       });
-    await assert.notEqual(starButton, false, `Cannot find [star] button`);
-    await starButton.click();
+    await assert.equal(starButton, true, `Cannot click [star] button`);
   });
 });

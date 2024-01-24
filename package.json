@@ -6,15 +6,20 @@
   "scripts": {
     "test": "npm-run-all -r -p test:*",
     "test:main": "npx mocha tests/test.js",
-    "report:lin": "cp -R allure-report/history/ allure-results/ && allure generate allure-results --clean -o allure-report && allure open allure-report -p 4445 && echo 'http://localhost:4445'"
+    "test:report:lin": "cp -R allure-report/history/ allure-results/ && npm run test && allure generate allure-results --clean -o allure-report && allure open allure-report -p 4445 && echo 'http://localhost:4445'",
+    "test:report:win": "rd /s /q allure-results allure-report>nul |echo.>nul & npm run test & allure generate ./allure-results/ & allure open ./allure-report/"
   },
   "author": "",
+  "type": "commonjs",
   "license": "ISC",
   "dependencies": {
-    "chai": "^4.3.4",
-    "mocha": "^9.1.0",
-    "mocha-allure-reporter": "^1.4.0",
-    "npm-run-all": "^4.1.5",
-    "selenium-webdriver": "4.0.0-alpha.5"
+    "chai": "4.3.4",
+    "mocha": "10.0.0",
+    "mocha-allure-reporter": "1.4.0",
+    "npm-run-all": "4.1.5",
+    "selenium-webdriver": "4.0.0"
+  },
+  "devDependencies": {
+    "allure-commandline": "^2.26.0"
   }
 }
